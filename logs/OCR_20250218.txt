@@ -1,0 +1,3 @@
+[2025-02-18 00:02:01] [OCR] 📌 OCR-Thread gestartet.
+[2025-02-18 00:22:38] [OCR] 📌 OCR-Thread gestartet.
+[2025-02-18 00:22:52] [OCR] 📌 OCR-Thread gestartet.

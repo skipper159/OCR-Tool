@@ -1,0 +1,14 @@
+{
+    "whitelist_monster": [
+        "Akeru"
+    ],
+    "whitelist_player": [],
+    "gm_warning": true,
+    "monster": {
+        "click_delay": 100
+    },
+    "player": {
+        "click_delay": 2500
+    },
+    "blacklist_player": []
+}

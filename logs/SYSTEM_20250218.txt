@@ -1,0 +1,26 @@
+[2025-02-18 00:01:28] [SYSTEM] Window list updated.
+[2025-02-18 00:01:56] [SYSTEM] Window list updated.
+[2025-02-18 00:01:58] [SYSTEM] Selected Window: Test GUI
+[2025-02-18 00:02:30] [SYSTEM] Window list updated.
+[2025-02-18 00:22:27] [SYSTEM] Window list updated.
+[2025-02-18 00:22:31] [SYSTEM] Selected Window: Test GUI
+[2025-02-18 00:22:38] [SYSTEM] ❌ Fehler im OCR-Thread:
+Traceback (most recent call last):
+  File "C:\Users\thoma\PycharmProjects\PythonProject\OCRv2\OCRControl.py", line 68, in run
+    recognized_positions = ocr_loop(self.recognized_positions, self.shared_settings)
+  File "C:\Users\thoma\PycharmProjects\PythonProject\OCRv2\ocr_module.py", line 65, in ocr_loop
+    recognized_positions = screenshot_ocr_paddle(shared_settings)
+  File "C:\Users\thoma\PycharmProjects\PythonProject\OCRv2\ocr_module.py", line 38, in screenshot_ocr_paddle
+    for word_info in line:
+TypeError: 'NoneType' object is not iterable
+
+[2025-02-18 00:22:52] [SYSTEM] ❌ Fehler im OCR-Thread:
+Traceback (most recent call last):
+  File "C:\Users\thoma\PycharmProjects\PythonProject\OCRv2\OCRControl.py", line 68, in run
+    recognized_positions = ocr_loop(self.recognized_positions, self.shared_settings)
+  File "C:\Users\thoma\PycharmProjects\PythonProject\OCRv2\ocr_module.py", line 65, in ocr_loop
+    recognized_positions = screenshot_ocr_paddle(shared_settings)
+  File "C:\Users\thoma\PycharmProjects\PythonProject\OCRv2\ocr_module.py", line 38, in screenshot_ocr_paddle
+    for word_info in line:
+TypeError: 'NoneType' object is not iterable
+

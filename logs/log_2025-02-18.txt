@@ -1,0 +1,2 @@
+[2025-02-18 00:02:06] OCR erkannte: akeru an Position (511, 215)
+[2025-02-18 00:02:12] OCR erkannte: akeru an Position (511, 215)

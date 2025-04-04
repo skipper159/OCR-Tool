@@ -1,0 +1,38 @@
+{
+    "1": {
+        "enabled": true,
+        "delay": 400
+    },
+    "2": {
+        "enabled": true,
+        "delay": 400
+    },
+    "3": {
+        "enabled": true,
+        "delay": 400
+    },
+    "4": {
+        "enabled": true,
+        "delay": 400
+    },
+    "5": {
+        "enabled": true,
+        "delay": 400
+    },
+    "6": {
+        "enabled": true,
+        "delay": 400
+    },
+    "7": {
+        "enabled": true,
+        "delay": 400
+    },
+    "8": {
+        "enabled": true,
+        "delay": 400
+    },
+    "9": {
+        "enabled": true,
+        "delay": 400
+    }
+}

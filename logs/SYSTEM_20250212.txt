@@ -1,0 +1,17 @@
+[2025-02-12 19:15:02] [SYSTEM] Window list updated.
+[2025-02-12 19:19:01] [SYSTEM] Window list updated.
+[2025-02-12 19:19:03] [SYSTEM] Ausgewähltes Fenster: Test GUI
+[2025-02-12 20:09:10] [SYSTEM] Ausgewähltes Fenster: Test GUI
+[2025-02-12 20:18:54] [SYSTEM] Ausgewähltes Fenster: Test GUI
+[2025-02-12 20:21:49] [SYSTEM] Window list updated.
+[2025-02-12 20:22:05] [SYSTEM] Selected Window: Test GUI
+[2025-02-12 20:22:07] [SYSTEM] ❌ Fehler bei Mausaktion:
+Traceback (most recent call last):
+  File "C:\Users\thoma\PycharmProjects\PythonProject\OCRv2\OCRControl.py", line 149, in perform_mouse_action
+    QMetaObject.invokeMethod(self, "move_and_click", Qt.QueuedConnection, Q_ARG(int, x), Q_ARG(int, y))
+NameError: name 'QMetaObject' is not defined
+
+[2025-02-12 20:24:10] [SYSTEM] Window list updated.
+[2025-02-12 20:24:20] [SYSTEM] Selected Window: Test GUI
+[2025-02-12 20:27:14] [SYSTEM] Window list updated.
+[2025-02-12 20:27:18] [SYSTEM] Selected Window: Test GUI

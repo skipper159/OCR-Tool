@@ -39,14 +39,17 @@ cd OCR-Tool
 
 2. Virtuelle Umgebung einrichten
 
-# Virtuelle Umgebung erstellen
+--> Virtuelle Umgebung erstellen
 python -m venv venv
 
-# Virtuelle Umgebung aktivieren
-# Für Windows:
+Virtuelle Umgebung aktivieren
+
+--> Für Windows:
+
 venv\Scripts\activate
-# Für Linux/Mac:
-# source venv/bin/activate
+
+--> Für Linux/Mac:
+source venv/bin/activate
 
 
 3. Abhängigkeiten installieren

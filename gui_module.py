@@ -1,6 +1,6 @@
 import sys
 from PySide6.QtWidgets import (
-    QApplication, QMainWindow, QPushButton, QLabel, QVBoxLayout, QWidget, QMenuBar, QMenu, QHBoxLayout
+    QApplication, QMainWindow, QPushButton, QLabel, QVBoxLayout, QWidget, QMenuBar, QMenu, QHBoxLayout, QMessageBox
 )
 from PySide6.QtCore import QThread, Signal, QObject, Qt
 from PySide6.QtGui import QIcon, QPixmap
@@ -103,9 +103,24 @@ class MainWindow(QMainWindow):
         # Hier Speicherlogik implementieren
 
     def open_license_manager(self):
-        """Öffnet den Lizenzmanager"""
-        print("License Manager geöffnet")
-        # Hier Lizenzmanager-Logik implementieren
+        """Öffnet den Lizenzmanager in einem neuen Fenster"""
+        try:
+            from license_gui import LicenseGUI
+
+            # Erstelle ein neues Fenster, falls nicht vorhanden
+            if not hasattr(self, "license_window") or not self.license_window.isVisible():
+                self.license_window = LicenseGUI()  # Kein Parent für eigenständiges Fenster
+                self.license_window.setWindowTitle("Lizenzverwaltung")
+
+            self.license_window.show()
+            self.license_window.activateWindow()  # Bringt Fenster in den Vordergrund
+
+        except ImportError as e:
+            print(f"Fehlendes Modul: {e}")
+            QMessageBox.critical(self, "Fehler", "Lizenzmodul nicht gefunden!")
+        except Exception as e:
+            print(f"Kritischer Fehler: {e}")
+            QMessageBox.critical(self, "Fehler", f"Fehler: {str(e)}")
 
     def open_keypresser_settings(self):
         """Öffnet Keypresser-Einstellungen"""

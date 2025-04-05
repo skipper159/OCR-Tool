@@ -102,7 +102,7 @@ class OcrThread(QThread):
         try:
             if not pygame.mixer.get_init():
                 pygame.mixer.init()
-            sound_file = os.path.join(os.getcwd(), "mausklick_ocr_bot", "Sounds", "Error.mp3")
+            sound_file = os.path.join(os.getcwd(), "OCRV2", "Sounds", "Error.mp3")
             error_sound = pygame.mixer.Sound(sound_file)
             error_sound.play()
         except Exception:

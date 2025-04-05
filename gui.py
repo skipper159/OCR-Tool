@@ -15,7 +15,6 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 SOUND_FILE = os.path.join(BASE_DIR, "Sounds", "error-126627.mp3")
 
 
-
 def load_settings():
     """Lädt die Einstellungen und stellt sicher, dass alle Schlüssel vorhanden sind."""
     default_settings = {
@@ -24,7 +23,13 @@ def load_settings():
         "blacklist_player": [],  # Neue Einstellung für die Player Blacklist
         "gm_warning": False,
         "monster": {"click_delay": 500},
-        "player": {"click_delay": 500}
+        "player": {"click_delay": 500},
+        "movement_bounds": {
+            "min_x": 1,
+            "max_x": 9999,
+            "min_y": 1,
+            "max_y": 9999
+        }
     }
 
     try:
@@ -34,6 +39,9 @@ def load_settings():
             for key in default_settings:
                 if key not in settings:
                     settings[key] = default_settings[key]
+            # Für verschachtelte Einstellungen wie movement_bounds
+            if "movement_bounds" in settings and not all(k in settings["movement_bounds"] for k in ["min_x", "max_x", "min_y", "max_y"]):
+                settings["movement_bounds"] = default_settings["movement_bounds"]
             return settings
     except (FileNotFoundError, json.JSONDecodeError):
         return default_settings
@@ -88,6 +96,10 @@ class SettingsWindow(QWidget):
         test_sound_button = QPushButton("Sound Test")
         test_sound_button.clicked.connect(self.test_sound)
         main_layout.addWidget(test_sound_button)
+
+        # Neuer Bereich für Bewegungsgrenzen
+        self.movement_bounds_group = self.create_movement_bounds_group()
+        main_layout.addWidget(self.movement_bounds_group)
 
         # Speichern-Button
         save_button = QPushButton("Save Settings")
@@ -230,6 +242,66 @@ class SettingsWindow(QWidget):
         setattr(self, f"{title.lower()}_delay_input", delay_input)
         return group_box
 
+    def create_movement_bounds_group(self):
+        """Erstellt eine Gruppierung für die Bewegungsgrenzen-Einstellungen."""
+        group_box = QGroupBox("Bewegungsgrenzen (Spielkoordinaten)")
+        layout = QVBoxLayout()
+        
+        # X-Grenzen
+        x_layout = QHBoxLayout()
+        x_layout.addWidget(QLabel("X-Min:"))
+        self.min_x_input = QSpinBox()
+        self.min_x_input.setRange(1, 9999)
+        self.min_x_input.setValue(self.settings.get("movement_bounds", {}).get("min_x", 1))
+        x_layout.addWidget(self.min_x_input)
+        
+        x_layout.addWidget(QLabel("X-Max:"))
+        self.max_x_input = QSpinBox()
+        self.max_x_input.setRange(1, 9999)
+        self.max_x_input.setValue(self.settings.get("movement_bounds", {}).get("max_x", 9999))
+        x_layout.addWidget(self.max_x_input)
+        
+        layout.addLayout(x_layout)
+        
+        # Y-Grenzen
+        y_layout = QHBoxLayout()
+        y_layout.addWidget(QLabel("Y-Min:"))
+        self.min_y_input = QSpinBox()
+        self.min_y_input.setRange(1, 9999)
+        self.min_y_input.setValue(self.settings.get("movement_bounds", {}).get("min_y", 1))
+        y_layout.addWidget(self.min_y_input)
+        
+        y_layout.addWidget(QLabel("Y-Max:"))
+        self.max_y_input = QSpinBox()
+        self.max_y_input.setRange(1, 9999)
+        self.max_y_input.setValue(self.settings.get("movement_bounds", {}).get("max_y", 9999))
+        y_layout.addWidget(self.max_y_input)
+        
+        layout.addLayout(y_layout)
+        
+        # Hilfebeschreibung hinzufügen
+        help_label = QLabel("Hinweis: Diese Werte sind Spielkoordinaten (1-9999), nicht Bildschirmkoordinaten.")
+        help_label.setWordWrap(True)
+        layout.addWidget(help_label)
+        
+        save_bounds_button = QPushButton("Bewegungsgrenzen speichern")
+        save_bounds_button.clicked.connect(self.save_movement_bounds)
+        layout.addWidget(save_bounds_button)
+        
+        group_box.setLayout(layout)
+        return group_box
+
+    def save_movement_bounds(self):
+        """Speichert die Bewegungsgrenzen-Einstellungen."""
+        self.settings["movement_bounds"] = {
+            "min_x": self.min_x_input.value(),
+            "max_x": self.max_x_input.value(),
+            "min_y": self.min_y_input.value(),
+            "max_y": self.max_y_input.value()
+        }
+        save_settings(self.settings)
+        QMessageBox.information(self, "Gespeichert", "Bewegungsgrenzen wurden gespeichert.")
+
     def toggle_gm_warning(self):
         """Aktiviert oder deaktiviert die GM Warning-Funktion."""
         self.settings["gm_warning"] = self.gm_warning_checkbox.isChecked()
@@ -243,6 +315,12 @@ class SettingsWindow(QWidget):
 
     def save_changes(self):
         """Speichert alle Änderungen."""
+        self.settings["movement_bounds"] = {
+            "min_x": self.min_x_input.value(),
+            "max_x": self.max_x_input.value(),
+            "min_y": self.min_y_input.value(),
+            "max_y": self.max_y_input.value()
+        }
         save_settings(self.settings)
         QMessageBox.information(self, "Saved", "Settings are updated!.")
 
